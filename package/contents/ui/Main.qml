@@ -567,10 +567,13 @@ Item {
 		return [
 			presetDuration(30),
 			presetDuration(60),
+			presetDuration(60 + 30),
+			presetDuration(2*60 + 30),
 			presetDuration(5*60),
 			presetDuration(10*60),
 			presetDuration(15*60),
 			presetDuration(20*60),
+			presetDuration(25*60),
 			presetDuration(30*60),
 			presetDuration(45*60),
 			presetDuration(60*60),
