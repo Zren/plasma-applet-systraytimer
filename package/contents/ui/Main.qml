@@ -312,13 +312,15 @@ Item {
 
 			
 			GridLayout {
-				Layout.alignment: Qt.AlignHCenter
+				Layout.fillWidth: true
 				columns: 6
 
 				Repeater {
 					model: presets
 					
 					delegate: PlasmaComponents.ToolButton {
+						Layout.fillWidth: true
+						Layout.minimumWidth: implicitWidth
 						implicitWidth: minimumWidth
 						// text: JSON.stringify(modelData)
 						text: modelData.label
@@ -337,7 +339,7 @@ Item {
 			}
 
 			GridLayout {
-				Layout.alignment: Qt.AlignHCenter
+				Layout.fillWidth: true
 				columns: 4
 
 				PlasmaCore.DataSource {
@@ -386,6 +388,8 @@ Item {
 					
 					delegate: PlasmaComponents.ToolButton {
 						enabled: modelData.enabled
+						Layout.fillWidth: true
+						Layout.minimumWidth: implicitWidth
 						implicitWidth: minimumWidth
 						text: modelData.label
 						onClicked: {
