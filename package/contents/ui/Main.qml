@@ -133,7 +133,7 @@ Item {
 		return minutes
 	}
 	function getSeconds(t) {
-		var millisLeftInMinute = timeLeft % (60 * 1000)
+		var millisLeftInMinute = t % (60 * 1000)
 		var seconds = millisLeftInMinute / 1000
 		return seconds
 	}
