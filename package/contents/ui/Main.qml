@@ -297,7 +297,11 @@ Item {
 	}
 
 	Plasmoid.fullRepresentation: Item {
+		Layout.minimumWidth: layout.implicitWidth
+		Layout.minimumHeight: layout.implicitHeight
+
 		// Rectangle { border.color: "#f00"; anchors.fill: layout; border.width: 1; color: "transparent" }
+
 		ColumnLayout {
 			id: layout
 			anchors.fill: parent
