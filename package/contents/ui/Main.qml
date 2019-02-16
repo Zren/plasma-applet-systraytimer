@@ -534,18 +534,38 @@ Item {
 		}
 	}
 
+	function formatDuration(totalSeconds) {
+		var t = totalSeconds * 1000
+		var str = ''
+		var hours = Math.floor(getHours(t))
+		if (hours > 0) {
+			str += i18nc("short form for %1 hours", "%1h", hours)
+		}
+		var minutes = Math.floor(getMinutes(t))
+		if (minutes > 0) {
+			str += i18nc("short form for %1 minutes", "%1m", minutes)
+		}
+		var seconds = Math.floor(getSeconds(t))
+		if (seconds > 0) {
+			str += i18nc("short form for %1 seconds", "%1s", seconds)
+		}
+		return str
+	}
+	function presetDuration(durationInSeconds) {
+		return formatDuration(durationInSeconds) + ';' + durationInSeconds
+	}
 	//30s;30,1m;60,Pomorro;240;60
 	property string defaultPresetString: {
 		return [
-			[i18n("30s"), 30].join(';'),
-			[i18n("1m"), 60].join(';'),
-			[i18n("5m"), 5*60].join(';'),
-			[i18n("10m"), 10*60].join(';'),
-			[i18n("15m"), 15*60].join(';'),
-			[i18n("20m"), 20*60].join(';'),
-			[i18n("30m"), 30*60].join(';'),
-			[i18n("45m"), 45*60].join(';'),
-			[i18n("1h"), 60*60].join(';'),
+			presetDuration(30),
+			presetDuration(60),
+			presetDuration(5*60),
+			presetDuration(10*60),
+			presetDuration(15*60),
+			presetDuration(20*60),
+			presetDuration(30*60),
+			presetDuration(45*60),
+			presetDuration(60*60),
 		].join(',')
 	}
 	property string presetString: '' || defaultPresetString
