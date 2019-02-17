@@ -19,3 +19,5 @@ X-KDE-PluginInfo-Category=Date and Time
 X-Plasma-NotificationArea=true
 X-Plasma-NotificationAreaCategory=ApplicationStatus
 X-KDE-PluginInfo-EnabledByDefault=true
+
+X-Plasma-StandAloneApp=true
