@@ -299,6 +299,8 @@ Item {
 	Plasmoid.fullRepresentation: Item {
 		Layout.minimumWidth: layout.implicitWidth
 		Layout.minimumHeight: layout.implicitHeight
+		Layout.preferredWidth: layout.implicitWidth
+		Layout.preferredHeight: layout.implicitHeight
 
 		// Rectangle { border.color: "#f00"; anchors.fill: layout; border.width: 1; color: "transparent" }
 
