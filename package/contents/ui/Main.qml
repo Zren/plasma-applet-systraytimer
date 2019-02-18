@@ -23,7 +23,7 @@ Item {
 	property bool repeat: false
 	property bool running: false
 	property int duration: 5 * 60 * 1000
-	property int timeLeft: 0
+	property int timeLeft: 5 * 60 * 1000
 	readonly property bool inProgress: timeLeft != duration
 
 	property string timeLeftText: ""
