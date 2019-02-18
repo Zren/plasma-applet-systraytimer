@@ -25,6 +25,8 @@ Item {
 	property int duration: 5 * 60 * 1000
 	property int timeLeft: 5 * 60 * 1000
 	readonly property bool inProgress: timeLeft != duration
+	property var targetTime: null
+	readonly property bool hasTargetTime: targetTime != null
 
 	property string timeLeftText: ""
 	function updateTimeLeftText() {
@@ -35,12 +37,25 @@ Item {
 	}
 
 	function setDuration(duration) {
+		main.targetTime = null
 		main.duration = duration
 		main.timeLeft = duration
 		main.active = true
 		if (!main.running) {
 			hideTimer.restart()
 		}
+	}
+	function setTargetTime(dt) {
+		console.log('setTargetTime', dt)
+		var now = new Date()
+		var duration = dt.getTime() - now.getTime()
+		console.log('\t duration', duration)
+		setDuration(duration)
+		main.targetTime = dt
+	}
+	function updateTargetTimeDuration() {
+		console.log('updateTargetTimeDuration', main.targetTime)
+		setTargetTime(main.targetTime)
 	}
 	function deltaDuration(multiplier) {
 		var delta
@@ -69,19 +84,27 @@ Item {
 	}
 
 	function startTimer() {
+		console.log('startTimer', main.running)
 		main.running = true
 		main.active = true
 		hideTimer.stop()
 	}
 	function pauseTimer() {
+		console.log('pauseTimer', main.running)
 		main.running = false
 		hideTimer.restart()
 	}
 
 	function toggleTimer() {
+		console.log('toggleTimer', main.running)
 		if (main.running) {
 			pauseTimer()
 		} else {
+			console.log('\t targetTime', main.targetTime)
+			console.log('\t hasTargetTime', main.hasTargetTime)
+			if (main.hasTargetTime) {
+				updateTargetTimeDuration()
+			}
 			if (main.duration > 0 && main.timeLeft == 0) {
 				main.timeLeft = main.duration
 			}
@@ -380,11 +403,10 @@ Item {
 							nextHour.setMinutes(i * 15)
 
 							var label = Qt.formatDateTime(nextHour, timeFormat)
-							var duration = Math.floor((nextHour.getTime() - now.getTime()) / 1000)
 							newModel.push({
 								enabled: nextHour.getTime() >= now.getTime(),
 								label: label,
-								durations: duration,
+								targetTime: nextHour,
 							})
 						}
 
@@ -399,7 +421,7 @@ Item {
 						implicitWidth: minimumWidth
 						text: modelData.label
 						onClicked: {
-							main.setDuration(modelData.durations * 1000)
+							main.setTargetTime(modelData.targetTime)
 							main.startTimer()
 						}
 					}
