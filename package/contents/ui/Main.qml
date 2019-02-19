@@ -115,9 +115,8 @@ Item {
 	signal timerCompleted()
 	onTimerCompleted: {
 		createNotification()
-		if (true) {
-			notificationSound.source = '/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga'
-			notificationSound.play()
+		if (plasmoid.configuration.timerSfxEnabled) {
+			playNotificationSound()
 		}
 
 		if (main.repeat) {
@@ -522,13 +521,33 @@ Item {
 		}
 	}
 
-
-
 	//-------
-	Audio {
-		id: notificationSound
+	PlasmaCore.DataSource {
+		id: executable
+		engine: "executable"
+		connectedSources: []
+		onNewData: {
+			var exitCode = data["exit code"]
+			var exitStatus = data["exit status"]
+			var stdout = data["stdout"]
+			var stderr = data["stderr"]
+			exited(sourceName, exitCode, exitStatus, stdout, stderr)
+			disconnectSource(sourceName) // cmd finished
+		}
+		function exec(cmd) {
+			if (cmd) {
+				connectSource(cmd)
+			}
+		}
+		signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
 	}
 
+	function playNotificationSound() {
+		var sfxFilepath = plasmoid.configuration.timerSfxFilepath
+		executable.exec('paplay \"' + sfxFilepath + '\"')
+	}
+
+	//-------
 	PlasmaCore.DataSource {
 		id: notificationSource
 		engine: "notifications"

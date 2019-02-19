@@ -3,7 +3,12 @@
 	<kcfgfile name=""/>
 
 	<group name="General">
-
+		<entry name="timerSfxEnabled" type="bool">
+			<default>true</default>
+		</entry>
+		<entry name="timerSfxFilepath" type="string">
+			<default>/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga</default>
+		</entry>
 	</group>
 
 </kcfg>
