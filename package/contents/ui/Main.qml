@@ -542,9 +542,23 @@ Item {
 		signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
 	}
 
-	function playNotificationSound() {
+	readonly property string timerSfxFilepath: {
 		var sfxFilepath = plasmoid.configuration.timerSfxFilepath
-		executable.exec('paplay \"' + sfxFilepath + '\"')
+		if (sfxFilepath.indexOf('/') == 0) {
+			// Valid
+			return sfxFilepath
+		} else if (sfxFilepath.indexOf('file:///') == 0) {
+			sfxFilepath = sfxFilepath.substr('file://'.length)
+			return sfxFilepath
+		} else {
+			// Invalid
+			return ''
+		}
+	}
+	function playNotificationSound() {
+		if (timerSfxFilepath) {
+			executable.exec('paplay \"' + timerSfxFilepath + '\"')
+		}
 	}
 
 	//-------
