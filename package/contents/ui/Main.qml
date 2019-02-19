@@ -541,10 +541,10 @@ Item {
 		var operation = service.operationDescription("createNotification")
 
 		operation.appName = i18n("Timer")
-		operation["appIcon"] = "chronometer"
+		operation.appIcon = "chronometer"
 		operation.summary = i18n("Timer finished")
-		operation["body"] = i18n("%1 has passed", KCoreAddons.Format.formatDuration(main.duration))
-		operation["expireTimeout"] = 2000
+		operation.body = i18n("%1 has passed", KCoreAddons.Format.formatDuration(main.duration))
+		operation.expireTimeout = 2000
 
 		service.startOperationCall(operation)
 	}
