@@ -46,15 +46,15 @@ Item {
 		}
 	}
 	function setTargetTime(dt) {
-		console.log('setTargetTime', dt)
+		// console.log('setTargetTime', dt)
 		var now = new Date()
 		var duration = dt.getTime() - now.getTime()
-		console.log('\t duration', duration)
+		// console.log('\t duration', duration)
 		setDuration(duration)
 		main.targetTime = dt
 	}
 	function updateTargetTimeDuration() {
-		console.log('updateTargetTimeDuration', main.targetTime)
+		// console.log('updateTargetTimeDuration', main.targetTime)
 		setTargetTime(main.targetTime)
 	}
 	function deltaDuration(multiplier) {
@@ -84,24 +84,24 @@ Item {
 	}
 
 	function startTimer() {
-		console.log('startTimer', main.running)
+		// console.log('startTimer', main.running)
 		main.running = true
 		main.active = true
 		hideTimer.stop()
 	}
 	function pauseTimer() {
-		console.log('pauseTimer', main.running)
+		// console.log('pauseTimer', main.running)
 		main.running = false
 		hideTimer.restart()
 	}
 
 	function toggleTimer() {
-		console.log('toggleTimer', main.running)
+		// console.log('toggleTimer', main.running)
 		if (main.running) {
 			pauseTimer()
 		} else {
-			console.log('\t targetTime', main.targetTime)
-			console.log('\t hasTargetTime', main.hasTargetTime)
+			// console.log('\t targetTime', main.targetTime)
+			// console.log('\t hasTargetTime', main.hasTargetTime)
 			if (main.hasTargetTime) {
 				updateTargetTimeDuration()
 			}
