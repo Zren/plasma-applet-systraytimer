@@ -170,7 +170,7 @@ Item {
 		} else if (state == '10seconds') {
 			return getSeconds(timeLeft).toFixed(1)
 		} else {
-			return 'Do'
+			return ''
 		}
 	}
 	property string line2: {
@@ -183,7 +183,7 @@ Item {
 		} else if (state == '10seconds') {
 			return i18nc("short suffix for seconds", "s")
 		} else {
-			return 'ne'
+			return ''
 		}
 	}
 
@@ -284,6 +284,46 @@ Item {
 				anchors.fill: parent
 				visible: !main.active
 				source: 'chronometer'
+			}
+
+			PlasmaCore.IconItem {
+				id: timerCompleteIcon
+				readonly property bool isAnimating: main.active && main.state == 'complete'
+				visible: timerCompleteIcon.isAnimating
+				anchors.centerIn: parent
+				source: 'kalarm'
+				width: parent.width
+				height: parent.height
+
+				property bool clockwise: true
+				property int swingAngle: 30
+				property int swingDuration: 400
+
+				Timer {
+					running: timerCompleteIcon.isAnimating
+					interval: timerCompleteIcon.swingDuration
+					repeat: true
+					triggeredOnStart: true
+					onTriggered: timerCompleteIcon.clockwise = !timerCompleteIcon.clockwise
+				}
+
+				//--- Simple Horizontal Flip Animation
+				rotation: -swingAngle
+				transform: Scale {
+					origin.x: timerCompleteIcon.width/2
+					xScale: timerCompleteIcon.clockwise ? -1 : 1
+				}
+				
+				//--- Rotation Animation
+				// rotation: clockwise ? -swingAngle : swingAngle
+				// Behavior on rotation {
+				// 	NumberAnimation {
+				// 		duration: timerCompleteIcon.swingDuration
+				// 		easing.type: Easing.OutElastic
+				// 		easing.amplitude: 2.0
+				// 		easing.period: 1.5
+				// 	}
+				// }
 			}
 		}
 
