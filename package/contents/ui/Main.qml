@@ -663,7 +663,7 @@ Item {
 		contextMenuTimer(60)
 
 		// setDuration(65 * 1000)
+		// setDuration(1 * 1000)
 		// startTimer()
-
 	}
 }
