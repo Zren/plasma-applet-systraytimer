@@ -17,7 +17,6 @@ Item {
 	Plasmoid.icon: ""
 	Plasmoid.toolTipMainText: timeLeftText
 	Plasmoid.toolTipSubText: ""
-	// Plasmoid.toolTipSubText: KCoreAddons.Format.formatDuration(main.duration)
 
 	property bool active: false
 	property bool repeat: false
@@ -29,8 +28,9 @@ Item {
 	readonly property bool hasTargetTime: targetTime != null
 
 	property string timeLeftText: ""
-	property string hmStr: ""
-	property string secStr: ""
+	property int hours: 0
+	property string hourStr: ""
+	property string minSecStr: ""
 	function padStart(num, size) {
 		var s = num+""
 		while (s.length < size) s = "0" + s
@@ -47,16 +47,17 @@ Item {
 		var MSecsInHour = 3600000
 		var MSecsInMinute = 60000
 		var MSecsInSecond = 1000
-		var ms = main.timeLeft
-		var hours = Math.floor(ms / MSecsInHour)
-		ms = ms % MSecsInHour
-		var minutes = Math.floor(ms / MSecsInMinute)
-		ms = ms % MSecsInMinute
-		var seconds = Math.floor(ms / MSecsInSecond)
-		ms = ms % MSecsInSecond
 
-		hmStr = i18nd("kcoreaddons5_qt", "%1:%2", hours, padStart(minutes,2))
-		secStr = padStart(seconds,2)
+		var ms = main.timeLeft
+		hours = Math.floor(ms / MSecsInHour)
+		hourStr = i18nc("short form for %1 hours", "%1h", hours)
+
+		ms = ms % MSecsInHour
+		var minSecMillis = ms
+
+		// Not sure how to reference DurationFormatOption.FoldHours, so use 0x8
+		// https://github.com/KDE/kcoreaddons/blob/e4d8085950b38e410ae9a5a147d3ecf7de559a8e/src/lib/util/kformat.h#L199
+		minSecStr = KCoreAddons.Format.formatDuration(minSecMillis, 0x8)
 	}
 	onTimeLeftChanged: {
 		updateTimeLeftText()
@@ -569,20 +570,9 @@ Item {
 						anchors.centerIn: parent
 
 						PlasmaComponents.Label {
-							id: hmLabel
-							Layout.fillHeight: true
-							text: main.hmStr
-							horizontalAlignment: Text.AlignHCenter
-							fontSizeMode: Text.FixedSize
-							font.pointSize: -1
-							font.pixelSize: timeLeftRow.textSize
-
-							// Rectangle { border.color: "#f00"; anchors.fill: parent; border.width: 1; color: "transparent" }
-						}
-
-						PlasmaComponents.Label {
-							id: secLabel
-							text: main.secStr
+							id: hourLabel
+							visible: main.hours > 0
+							text: main.hourStr
 							horizontalAlignment: Text.AlignHCenter
 							fontSizeMode: Text.FixedSize
 							font.pointSize: -1
@@ -595,6 +585,20 @@ Item {
 							// We can't use fillHeight since hmLabel is taller than it's container.
 							Layout.preferredHeight: timeLeftRow.textSize
 							verticalAlignment: Qt.AlignTop
+
+							// Rectangle { border.color: "#f00"; anchors.fill: parent; border.width: 1; color: "transparent" }
+						}
+
+						PlasmaComponents.Label {
+							// id: hmLabel
+							id: minSecLabel
+							Layout.fillHeight: true
+							// text: main.hmStr
+							text: main.minSecStr
+							horizontalAlignment: Text.AlignHCenter
+							fontSizeMode: Text.FixedSize
+							font.pointSize: -1
+							font.pixelSize: timeLeftRow.textSize
 
 							// Rectangle { border.color: "#f00"; anchors.fill: parent; border.width: 1; color: "transparent" }
 						}
