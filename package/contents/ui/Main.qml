@@ -53,11 +53,13 @@ Item {
 		hourStr = i18nc("short form for %1 hours", "%1h", hours)
 
 		ms = ms % MSecsInHour
-		var minSecMillis = ms
+		var minutes = Math.floor(ms / MSecsInMinute)
+		ms = ms % MSecsInMinute
+		var seconds = Math.floor(ms / MSecsInSecond)
 
-		// Not sure how to reference DurationFormatOption.FoldHours, so use 0x8
-		// https://github.com/KDE/kcoreaddons/blob/e4d8085950b38e410ae9a5a147d3ecf7de559a8e/src/lib/util/kformat.h#L199
-		minSecStr = KCoreAddons.Format.formatDuration(minSecMillis, 0x8)
+		var minStr = hours > 0 ? padStart(minutes, 2) : ""+minutes
+		var secStr = padStart(seconds, 2)
+		minSecStr = i18nd("kcoreaddons5_qt", "%1:%2", minStr, secStr)
 	}
 	onTimeLeftChanged: {
 		updateTimeLeftText()
