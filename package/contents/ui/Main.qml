@@ -55,7 +55,7 @@ Item {
 		var seconds = Math.floor(ms / MSecsInSecond)
 		ms = ms % MSecsInSecond
 
-		hmStr = i18nd("kcoreaddons5_qt", "%1:%2", padStart(hours,2), padStart(minutes,2))
+		hmStr = i18nd("kcoreaddons5_qt", "%1:%2", hours, padStart(minutes,2))
 		secStr = padStart(seconds,2)
 	}
 	onTimeLeftChanged: {
