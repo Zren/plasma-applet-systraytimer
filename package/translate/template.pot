@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: systraytimer \n"
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-systraytimer\n"
-"POT-Creation-Date: 2019-02-21 21:56-0500\n"
+"POT-Creation-Date: 2019-03-04 14:49-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,44 +37,44 @@ msgstr ""
 msgid "<b>Version:</b> %1"
 msgstr ""
 
-#: ../contents/ui/Main.qml:165 ../contents/ui/Main.qml:647
+#: ../contents/ui/Main.qml:53 ../contents/ui/Main.qml:194 ../contents/ui/Main.qml:724
 msgctxt "short form for %1 hours"
 msgid "%1h"
 msgstr ""
 
-#: ../contents/ui/Main.qml:180
+#: ../contents/ui/Main.qml:209
 msgctxt "short suffix for minutes"
 msgid "m"
 msgstr ""
 
-#: ../contents/ui/Main.qml:182 ../contents/ui/Main.qml:184
+#: ../contents/ui/Main.qml:211 ../contents/ui/Main.qml:213
 msgctxt "short suffix for seconds"
 msgid "s"
 msgstr ""
 
-#: ../contents/ui/Main.qml:616
+#: ../contents/ui/Main.qml:693
 msgid "Timer"
 msgstr ""
 
-#: ../contents/ui/Main.qml:618
+#: ../contents/ui/Main.qml:695
 msgid "Timer finished"
 msgstr ""
 
-#: ../contents/ui/Main.qml:619
+#: ../contents/ui/Main.qml:696
 msgid "%1 has passed"
 msgstr ""
 
-#: ../contents/ui/Main.qml:628
+#: ../contents/ui/Main.qml:705
 msgid "%1 minutes"
 msgstr ""
 
-#: ../contents/ui/Main.qml:651
+#: ../contents/ui/Main.qml:728
 #, c-format
 msgctxt "short form for %1 minutes"
 msgid "%1m"
 msgstr ""
 
-#: ../contents/ui/Main.qml:655
+#: ../contents/ui/Main.qml:732
 #, c-format
 msgctxt "short form for %1 seconds"
 msgid "%1s"
